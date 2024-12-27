@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type BlogPost = {
     id: string;
     title: string;
@@ -17,17 +19,17 @@ type BlogPost = {
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post) => (
             <li key={post.id} className="border p-4 rounded-md shadow hover:shadow-lg bg-white">
-              <a href={`/blog/${post.id}`} className="text-blue-600 hover:underline text-lg font-semibold">
+              <Link href={`/blog/${post.id}`} className="text-blue-600 hover:underline text-lg font-semibold">
                 {post.title}
-              </a>
+              </Link>
               <p className="text-gray-600 mt-2">{post.content}</p>
             </li>
           ))}
         </ul>
         <div className="mt-8 text-center">
-          <a href="/" className="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
+          <Link href="/" className="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
             Back to Home
-          </a>
+          </Link>
         </div>
       </div>
     );

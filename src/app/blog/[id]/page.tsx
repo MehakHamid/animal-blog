@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 type BlogPost = {
@@ -24,7 +25,7 @@ export default function BlogPost({ params }: { params: { id: string } }) {
       <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
       <p className="text-gray-700 leading-relaxed">{post.content}</p>
       <div className="mt-8">
-        <a href="/" className="text-blue-500 underline">← Back to Home</a>
+        <Link href="/" className="text-blue-500 underline">← Back to Home</Link>
       </div>
     </div>
   );
