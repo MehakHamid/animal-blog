@@ -1,31 +1,32 @@
 import { notFound } from "next/navigation";
 
+// Example blog data (you should replace this with actual data fetching logic)
+const blogPosts = [
+  { id: "1", title: "The Majesty of Lions", content: "Explore the life of lions in the wild." },
+  { id: "2", title: "Secrets of the Ocean: Dolphins", content: "Discover the intelligence of dolphins." },
+  { id: "3", title: "The Playful World of Otters", content: "Learn about otters and their habitats." },
+];
+
+// Define the expected type of the post object
 type BlogPost = {
   id: string;
   title: string;
   content: string;
 };
 
-// Example blog data (You should replace this with actual data fetching logic)
-const blogPosts: BlogPost[] = [
-  { id: "1", title: "The Majesty of Lions", content: "Explore the life of lions in the wild." },
-  { id: "2", title: "Secrets of the Ocean: Dolphins", content: "Discover the intelligence of dolphins." },
-  { id: "3", title: "The Playful World of Otters", content: "Learn about otters and their habitats." },
-];
-
+// Explicitly type the PageProps (params: { id: string })
 interface BlogPostPageProps {
-  params: {
-    id: string;
-  };
+  params: { id: string }; // Define the id parameter
 }
 
+// Use the type BlogPostPageProps for the component's props
 export default function BlogPost({ params }: BlogPostPageProps) {
-  // Find the blog post by matching the id
+  // Find the blog post based on the ID parameter
   const post = blogPosts.find((blog) => blog.id === params.id);
 
-  // Handle post not found
+  // If no post is found, show a 404 page
   if (!post) {
-    notFound(); // Shows the 404 page if the post isn't found
+    notFound();
   }
 
   return (
