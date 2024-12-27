@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 type BlogPost = {
@@ -7,26 +6,32 @@ type BlogPost = {
   content: string;
 };
 
-const blogPosts: Record<string, BlogPost> = {
-  "1": { title: "The Majesty of Lions", content: "Lions are known as the kings of the jungle..." },
-  "2": { title: "Secrets of the Ocean: Dolphins", content: "Dolphins are highly intelligent and social creatures..." },
-  "3": { title: "The Playful World of Otters", content: "Otters are playful animals found in rivers and oceans..." },
-};
+// Example blog data (You should replace this with actual data fetching logic)
+const blogPosts: BlogPost[] = [
+  { id: "1", title: "The Majesty of Lions", content: "Explore the life of lions in the wild." },
+  { id: "2", title: "Secrets of the Ocean: Dolphins", content: "Discover the intelligence of dolphins." },
+  { id: "3", title: "The Playful World of Otters", content: "Learn about otters and their habitats." },
+];
 
-export default function BlogPost({ params }: { params: { id: string } }) {
-  const post = blogPosts[params.id];
+interface BlogPostPageProps {
+  params: {
+    id: string;
+  };
+}
 
+export default function BlogPost({ params }: BlogPostPageProps) {
+  // Find the blog post by matching the id
+  const post = blogPosts.find((blog) => blog.id === params.id);
+
+  // Handle post not found
   if (!post) {
-    notFound(); // Displays 404 page if the post isn't found
+    notFound(); // Shows the 404 page if the post isn't found
   }
 
   return (
-    <div className="p-4 max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-      <p className="text-gray-700 leading-relaxed">{post.content}</p>
-      <div className="mt-8">
-        <Link href="/" className="text-blue-500 underline">← Back to Home</Link>
-      </div>
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-4xl font-bold mb-4">{post?.title}</h1>
+      <p className="text-gray-700">{post?.content}</p>
     </div>
   );
 }
